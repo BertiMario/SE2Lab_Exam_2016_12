@@ -134,7 +134,42 @@ var insertStudent = function insertStudent(student)
 }
 
 //AGGIUNGERE QUI SOTTO NUOVE FUNZIONI
+//Berti Mario 172136
 
+var searchStudentsByMark = function searchStudentSSN(mark)
+{
+    var listaDiStudenti = [];
+    if(parseInt(mark[1])) //verifico che sia un numero
+    {
+        if(mark[0]==">") //se c'è > faccio...
+        {
+            for (i=0; i < studentList.length; i++)
+            {
+                if (studentList[i].mark > parseInt(mark[1]))
+                {
+                    listaDiStudenti.push(studentList[i])
+                }
+            }
+        }
+        else
+        {
+            if(mark[0]=="<") //se c'è < faccio...
+            {
+                for (i=0; i < studentList.length; i++)
+                {
+                    if (studentList[i].mark < parseInt(mark[1]))
+                    {
+                        listaDiStudenti.push(studentList[i])
+                    }
+                }
+            }
+        }
+        return listaDiStudenti;
+    }
+    //if reach this point return null
+    return null;
+    
+}
 
 
 //export functions
@@ -143,4 +178,5 @@ exports.searchStudentSSN = searchStudentSSN;
 exports.deleteStudentID = deleteStudentID; 
 exports.deleteStudentSSN = deleteStudentSSN; 
 exports.insertStudent = insertStudent;  
+exports.searchStudentsByMark = searchStudentsByMark;
 exports.getList = getList; 

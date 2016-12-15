@@ -272,3 +272,62 @@ app.listen(app.get('port'), function() {
 });
 
 //AGGIUNGERE QUI SOTTO NUOVE FUNZIONI
+//funzione di Berti Mario 172136
+app.post('/searchByMark', function(request, response) 
+{
+	var headers = {};
+	headers["Access-Control-Allow-Origin"] = "*";
+	headers["Access-Control-Allow-Methods"] = "POST, GET, PUT, DELETE, OPTIONS";
+	headers["Access-Control-Allow-Credentials"] = false;
+	headers["Access-Control-Max-Age"] = '86400'; // 24 hours
+	headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept";
+	headers["Content-Type"] = "application/json";
+
+	var Mark;
+	
+	//check body and parameters
+	if ( typeof request.body !== 'undefined' && request.body)
+	{
+		if ( typeof request.body.mark !== 'undefined' && request.body.mark)
+            {
+			 Mark = request.body.ID;
+            }
+		else 
+			Mark = "not defined";
+	
+	}
+	else
+	{
+		Mark = "body undefined";
+	}
+    
+    if (Mark!="not defined" && Mark!="body undefined")
+	{
+		//aceptable input
+		//search for marks
+		var student = studentManager.searchMark(mark);
+		//if exists
+		if (student != null)
+		{
+			response.writeHead(200, headers);
+			response.end(JSON.stringify(student));
+		}
+		else
+		{
+			response.writeHead(404, headers);
+			response.end(JSON.stringify());
+		}
+
+	}
+    else    
+	{
+		//unaceptable input
+		response.writeHead(406, headers);
+		response.end(JSON.stringify("1"));
+	}   
+
+});
+
+
+
+

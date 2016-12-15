@@ -76,7 +76,7 @@ paths:
 /addStudent:
     post:
       summary: add a student
-      description: it returns the name of a student, given his/her ID or SSN
+      description: aggiunge un nuovo studente dato ID,SSN,name,address,mark
       parameters:
         - name: ID
           in: formData
@@ -151,4 +151,7 @@ definitions:
       address:
         type: string
         description: address of the student
+      mark:
+	type:integer
+	description: mark of the student
 

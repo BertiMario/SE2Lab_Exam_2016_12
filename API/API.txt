@@ -15,7 +15,7 @@ paths:
   /showList:
     get:
       summary: show list of students
-      description: it returns the complete lest of all students in the university
+      description: it returns the complete list of all students in the university
       responses:
         200:
           description: the home page
@@ -28,7 +28,7 @@ paths:
         - name: ID
           in: formData
           description: ID of the student
-          required: true
+          required: true 
           type: string
       responses:
         200:
@@ -36,13 +36,13 @@ paths:
           schema: 
               $ref: "#/definitions/student"
         406:
-          description: ID of error
+          description: "1"
           schema: 
             properties:
               error:
                 type: integer
         404:
-          description: no students with that ID or SSN
+          description: no students with that ID
           
   /deleteStudent:
     post:
@@ -52,12 +52,12 @@ paths:
         - name: ID
           in: formData
           description: ID of the student
-          required: false
+          required: false if there is SSN
           type: string
         - name: SSN
           in: formData
           description: SSN of the student
-          required: false
+          required: false if there is ID
           type: string
       responses:
         200:
@@ -65,7 +65,7 @@ paths:
           schema: 
             $ref: "#/definitions/student"
         406:
-          description: ID of error
+          description: "1"
           schema: 
             properties:
               error:
@@ -73,14 +73,59 @@ paths:
         404:
           description: no students with that ID or SSN
             
+/addStudent:
+    post:
+      summary: add a student
+      description: it returns the name of a student, given his/her ID or SSN
+      parameters:
+        - name: ID
+          in: formData
+          description: ID of the student
+          required: true
+          type: string
+        - name: SSN
+          in: formData
+          description: SSN of the student
+          required: true
+          type: string
+	 -name: name
+          in: formData
+          description: name of the student
+          required: true
+          type: string
+        - name: address
+          in: formData
+          description: addres of the student
+          required: true
+          type: string
+	- name: mark
+          in: formData
+          description: mark of the student
+          required: true
+          type: string
+
+      responses:
+        200:
+          description: name of the student
+          schema: 
+            $ref: "#/definitions/student"
+        406:
+          description: "1"
+          schema: 
+            properties:
+              error:
+                type: integer
+        404:
+          description: no students with that ID or SSN
+
   /searchByMark:
     post:
-      summary: return students that match a criteria
-      description: it returns a list of students that match a criteria
+      summary: return students that match a mark
+      description: it returns a list of students that match a mark
       parameters:
-        - name: criteria
+        - name: mark
           in: formData
-          description: criteria to be matched
+          description: mark to be matched
           required: true
           type: string
       responses:
